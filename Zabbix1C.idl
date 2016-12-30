@@ -1,0 +1,75 @@
+[
+  uuid(9B66190C-943D-48A6-8EB0-F68B108E6C00), 
+  version(1.0), 
+  helpstring("Zabbix1C Library")
+
+]
+library Zabbix1C
+{
+
+  importlib("stdole2.tlb");
+
+  [
+    uuid(9C009EDE-4E75-4B60-9928-320F2445B118), 
+    version(1.0), 
+    helpstring("Dispatch interface for Zabbix Object "), 
+    dual, 
+    oleautomation
+  ]
+   interface IZabbix: IDispatch
+  {
+    [
+    propget, 
+    id(0x000000C9)
+    ]
+    HRESULT _stdcall Host([out, retval] BSTR * Value );
+    [
+    propput, 
+    id(0x000000C9)
+    ]
+    HRESULT _stdcall Host([in] BSTR Value );
+    [
+    propget, 
+    id(0x000000CA)
+    ]
+    HRESULT _stdcall Port([out, retval] long * Value );
+    [
+    propput, 
+    id(0x000000CA)
+    ]
+    HRESULT _stdcall Port([in] long Value );
+    [
+    propget, 
+    id(0x000000CD)
+    ]
+    HRESULT _stdcall Timeout([out, retval] long * Value );
+    [
+    propput, 
+    id(0x000000CD)
+    ]
+    HRESULT _stdcall Timeout([in] long Value );
+    [
+    id(0x000000CB)
+    ]
+    HRESULT _stdcall Init([in] BSTR HostZ, [in] long Port, [in] long Timeout );
+    [
+    id(0x000000CC)
+    ]
+    HRESULT _stdcall Close( void );
+    [
+    id(0x000000CE)
+    ]
+    HRESULT _stdcall Send([in] BSTR Host, [in] BSTR KeyItem, [in] BSTR KeyValue );
+  };
+
+  [
+    uuid(70F10D59-F640-479E-B87A-F4C396B27BB2), 
+    version(1.0), 
+    helpstring("Zabbix Object")
+  ]
+  coclass Zabbix
+  {
+    [default] interface IZabbix;
+  };
+
+}; 
